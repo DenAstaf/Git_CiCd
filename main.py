@@ -1,3 +1,10 @@
+"""
+Данный модуль выполняет:
+Создает экземпляр приложения FastAPI.
+Настраивает шаблонизатор Jinja2.
+Определяет маршруты
+"""
+
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -10,22 +17,21 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 
-# Определяем маршрут корневого пути
 @app.get("/")
 def read_root():
+    """Определяет маршрут корневого пути"""
     return "Hello, World!"
 
 
-# Определяем маршрут, возвращающий JSON ответ
 @app.get("/json")
 def read_json():
+    """Определяет маршрут, возвращающий JSON ответ"""
     return {"message": "Hello, World in JSON!"}
 
 
-
-# Определяем маршрут, использующий шаблон Jinja2 для формирования ответа
 @app.get("/html", response_class=HTMLResponse)
 def read_templated_html(request: Request):
+    """# Определяет маршрут, использующий шаблон Jinja2 для формирования ответа"""
     context = {
         "request": request,
         "title": "Hello, Templated World!",
