@@ -1,3 +1,4 @@
+"""Тесты для модуля main.py."""
 from fastapi.testclient import TestClient
 from main import app
 
