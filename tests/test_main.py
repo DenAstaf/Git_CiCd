@@ -31,3 +31,12 @@ def test_read_fake_route():
     """Тестирует несуществующий маршрут."""
     response = client.get("/fake")
     assert response.status_code == 404
+
+
+def test_read_query_string():
+    """Тестирует маршрут, возвращающий ответ с использованием query строки."""
+    name = "Test"
+    response = client.get(f"/query?name={name}")
+
+    assert response.status_code == 200
+    assert response.json() == {"message": f"Hello, my name is {name}!"}

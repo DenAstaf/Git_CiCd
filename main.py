@@ -31,9 +31,15 @@ def read_json():
 
 @app.get("/html", response_class=HTMLResponse)
 def read_templated_html(request: Request):
-    """# Определяет маршрут, использующий шаблон Jinja2 для формирования ответа"""
+    """Определяет маршрут, использующий шаблон Jinja2 для формирования ответа"""
     context = {
         "title": "Hello, Templated World!",
         "message": "Hello, World in HTML with Templating!",
     }
     return templates.TemplateResponse(request, "step_1.html", context)
+
+
+@app.get("/query")
+def read_query_string(name: str):
+    """Определяет маршрут, возвращающий ответ с использованием query строки"""
+    return {"message": f"Hello, my name is {name}!"}

@@ -25,6 +25,9 @@ jobs:
     - name: Install pytest
       run: |
         poetry add --dev pytest  # Устанавливаем pytest как dev-зависимость
+    - name: Install pytest-cov
+      run: |
+        poetry add --dev pytest-cov  # Устанавливаем pytest-cov как dev-зависимость
     - name: Analysing the code with pylint
       run: |
-        poetry run pytest  # Запускаем pytest через Poetry
+        poetry run pytest -s --cov --cov-report html --cov-fail-under=90  # Запускаем pytest через Poetry
