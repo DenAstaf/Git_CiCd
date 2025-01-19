@@ -20,7 +20,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 def read_root():
     """Определяет маршрут корневого пути"""
-    return "Hello, World!"
+    return 'Hello, World!'
 
 
 @app.get("/json")
@@ -33,8 +33,7 @@ def read_json():
 def read_templated_html(request: Request):
     """# Определяет маршрут, использующий шаблон Jinja2 для формирования ответа"""
     context = {
-        "request": request,
         "title": "Hello, Templated World!",
         "message": "Hello, World in HTML with Templating!",
     }
-    return templates.TemplateResponse("step_1.html", context)
+    return templates.TemplateResponse(request, "step_1.html", context)
