@@ -15,12 +15,14 @@ stages:          # List of stages for jobs, and their order of execution
 lint:   # This job runs in the test stage.
   stage: testing    # It only starts when the job in the build stage completes successfully.
   tags:
-    - testsss
+    - lints
   script:
     - poetry run pylint $(git ls-files '*.py')
 
 test:   # This job runs in the test stage.
   stage: testing    # It only starts when the job in the build stage completes successfully.
+  tags:
+    - tests
   script:
     - poetry run pytest -s --cov --cov-report html --cov-fail-under=80
 
