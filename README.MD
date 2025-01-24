@@ -11,12 +11,14 @@
 Необходимо запушить проект на GitHub и проверить как отработают Actions
 
 **Работа с GitLab**
-1. Установка GitLab с помощью Docker:<br>
-`docker run --detach --hostname gitlab.local --publish 8000:80 --publish 443:443 --publish 22:22 --name gitlab --restart always --volume C:\srv\gitlab\config:/etc/gitlab --volume C:\srv\gitlab\logs:/var/log/gitlab --volume C:\srv\gitlab\data:/var/opt/gitlab gitlab/gitlab-ee:latest`
+1. Установка GitLab с помощью docker-compose:<br>
+`docker-compose up -d`
 2. Открыть файл C:\Windows\System32\drivers\etc\hosts с правами администратора и добавить в конец файла:<br>
 `127.0.0.1 gitlab.local`
 3. Сбросить пароль и задать новый:<br>
-`docker exec -it gitlab gitlab-rake "gitlab:password:reset[root]"`
+`docker exec -it <gitlab-container-id> /bin/bash` - получить доступ к контейнеру<br>
+`gitlab-rake "gitlab:password:reset[root]"` - сбросить пароль<br>
+`exit` - выйти
 4. Перейти на GitLab http://gitlab.local:8000/ и авторизоваться:<br>
 `логин: root`<br>
 `пароль: который был задан при сбросе старого пароля`

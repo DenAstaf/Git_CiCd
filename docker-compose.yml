@@ -1,0 +1,22 @@
+services:
+  gitlab:
+    image: 'gitlab/gitlab-ee:latest'
+    restart: always
+    hostname: 'gitlab.local'
+    ports:
+      - '8000:80'
+      - '443:443'
+      - '22:22'
+    volumes:
+      - 'C:\srv\gitlab\config:/etc/gitlab'
+      - 'C:\srv\gitlab\logs:/var/log/gitlab'
+      - 'C:\srv\gitlab\data:/var/opt/gitlab'
+
+  gitlab-runner:
+    image: 'gitlab/gitlab-runner:latest'
+    restart: always
+    volumes:
+      - 'C:\srv\gitlab-runner/config:/etc/gitlab-runner'  # Путь для конфигурации GitLab Runner
+      - '/var/run/docker.sock:/var/run/docker.sock'       # Для использования Docker внутри Runner
+    depends_on:
+      - gitlab
